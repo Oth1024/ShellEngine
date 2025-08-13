@@ -18,6 +18,8 @@
         
         LeftDown,
         
-        LeftCenter
+        LeftCenter,
+
+        OverCenter
     }
 }

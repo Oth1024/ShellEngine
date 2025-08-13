@@ -39,12 +39,17 @@ namespace ShellEngine.Prelude.App
         {
             if (!_started)
             {
+                _world.BuildWorld();
                 _work = new Work(() =>
                 {
                     _world.ReBuildWorld();
                 });
                 _work.Start();
                 _started = true;
+            }
+            else
+            {
+                throw new Exception($"Application has been started!");
             }
         }
 

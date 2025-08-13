@@ -17,9 +17,10 @@ namespace ShellEngine.Prelude.World
     {
         #region Fields
         #region Schedules
-        private ConcurrentStack<(Action<List<IComponent>>, Type, Type, Type)> _preSchedules = new();
-        private ConcurrentStack<(Action<List<IComponent>>, Type, Type, Type)> _schedules = new();
-        private ConcurrentStack<(Action<List<IComponent>>, Type, Type, Type)> _postSchedule = new();
+        private ConcurrentQueue<(Action<List<IComponent>>, Type, Type, Type)> _startupSchedules = new();
+        private ConcurrentQueue<(Action<List<IComponent>>, Type, Type, Type)> _preSchedules = new();
+        private ConcurrentQueue<(Action<List<IComponent>>, Type, Type, Type)> _schedules = new();
+        private ConcurrentQueue<(Action<List<IComponent>>, Type, Type, Type)> _postSchedule = new();
 
         private ConcurrentDictionary<Type, IResource> _resources = new();
         private ConcurrentDictionary<uint, IEntity> _entities = new();
@@ -36,22 +37,28 @@ namespace ShellEngine.Prelude.World
         {
             switch (scheduleType)
             {
+                case ScheduleType.Startup:
+                    foreach (var schedule in schedules)
+                    {
+                        _startupSchedules.Enqueue(schedule);
+                    }
+                    break;
                 case ScheduleType.PreSchedule:
                     foreach (var schedule in schedules)
                     {
-                        _preSchedules.Push(schedule);
+                        _preSchedules.Enqueue(schedule);
                     }
                     break;
                 case ScheduleType.Schedule:
                     foreach (var schedule in schedules)
                     {
-                        _schedules.Push(schedule);
+                        _schedules.Enqueue(schedule);
                     }
                     break;
                 case ScheduleType.PostSchedule:
                     foreach (var schedule in schedules)
                     {
-                        _postSchedule.Push(schedule);
+                        _postSchedule.Enqueue(schedule);
                     }
                     break;
             }
@@ -95,6 +102,14 @@ namespace ShellEngine.Prelude.World
         {
             entity = _entities.FirstOrDefault(x => x.Value.TryGetComponent(componentType, out _)).Value;
             return entity != null;
+        }
+
+        public void BuildWorld()
+        {
+            foreach (var startupSchedule in _startupSchedules)
+            {
+                Execute(startupSchedule);
+            }
         }
 
         public void ReBuildWorld()

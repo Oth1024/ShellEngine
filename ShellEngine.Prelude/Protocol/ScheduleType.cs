@@ -13,19 +13,24 @@ namespace ShellEngine.Prelude.Protocol
     public enum ScheduleType
     {
         /// <summary>
-        /// "PreSchedule" functions at first;<br/>
+        /// "Startup" schedule functions only at the begining of the application and runs only once.
+        /// </summary>
+        Startup,
+
+        /// <summary>
+        /// "PreSchedule" schedule functions at first;<br/>
         /// "PreSchedule" is always responsible for data synchronization and automatic updates.
         /// </summary>
         PreSchedule,
 
         /// <summary>
-        /// "Schedule" functions after "PreSchedule" and before "PostSchedule";<br/>
+        /// "Schedule" schedule functions after "PreSchedule" and before "PostSchedule";<br/>
         /// Rendering happens at the end of this process.
         /// </summary>
         Schedule,
 
         /// <summary>
-        /// "PostSchedule" functions at last;<br/>
+        /// "PostSchedule" schedule functions at last;<br/>
         /// Rendering results can be acquired in this process;<br/>
         /// "PostSchedule" is always responsible for callbacks and data post updates.
         /// </summary>
