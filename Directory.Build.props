@@ -1,0 +1,15 @@
+<Project>
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <PublishSingleFile>true</PublishSingleFile>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <PublishTrimmed>true</PublishTrimmed>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <Nullable>enable</Nullable>
+    <Company>Oth1024Studio</Company>
+    <Authors>oth1024</Authors>
+    <Platforms>x64</Platforms>
+    <AvaloniaVersion>11.0.10</AvaloniaVersion>
+    <OutputPath>$(SolutionDir)Output\bin\$(Platform)\</OutputPath>
+  </PropertyGroup>
+</Project>
