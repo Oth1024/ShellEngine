@@ -75,18 +75,18 @@ namespace ShellEngine.Prelude.World
             return this;
         }
 
-        public World AddResources(IEnumerable<IResource> resources)
+        public World AddResources(IEnumerable<(Type, IResource)> resources)
         {
             foreach (var res in resources)
             {
-                var resType = res.GetType();
+                var resType = res.Item1;
                 if (_resources.ContainsKey(resType))
                 {
                     throw new Exception($"Resource of type[{resType}] already exists!");
                 }
                 else
                 {
-                    _resources[resType] = res;
+                    _resources[resType] = res.Item2;
                 }
             }
             return this;

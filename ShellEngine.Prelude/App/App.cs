@@ -66,7 +66,7 @@ namespace ShellEngine.Prelude.App
             return this;
         }
 
-        public App AddResources(params IResource[] resources)
+        public App AddResources(params (Type, IResource)[] resources)
         {
             _world.AddResources(resources);
             return this;

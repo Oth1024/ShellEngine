@@ -1,7 +1,7 @@
 ﻿using ShellEngine.Prelude.Components;
 using ShellEngine.Prelude.Protocol;
 
-namespace ShellEngine.Prelude.Plugin
+namespace ShellEngine.Prelude.Plugin.SimpleWindowPlugin
 {
     public class SimpleWindowPlugin : IPlugin
     {
@@ -12,7 +12,7 @@ namespace ShellEngine.Prelude.Plugin
         #endregion
 
         #region Constructor
-        public SimpleWindowPlugin(Size windowSize, PositionType windowInitialLocation = PositionType.OverCenter, Point location = null)
+        public SimpleWindowPlugin(Size windowSize, Size resolutionSize, PositionType windowInitialLocation = PositionType.OverCenter, Point location = null)
         {
 
         }
@@ -24,9 +24,9 @@ namespace ShellEngine.Prelude.Plugin
         /// <param name="windowInitialLocation">Window location when startup; This will not take effect if the "location" pamram not equals to "null";</param>
         /// <param name="location">Window location when startup.</param>
         /// <returns></returns>
-        public static SimpleWindowPlugin StartASimpleWindow(Size windowSize, PositionType windowInitialLocation = PositionType.OverCenter, Point location = null)
+        public static SimpleWindowPlugin StartASimpleWindow(Size windowSize, Size resolutionSize, PositionType windowInitialLocation = PositionType.OverCenter, Point location = null)
         {
-            return new SimpleWindowPlugin(windowSize, windowInitialLocation, location);
+            return new SimpleWindowPlugin(windowSize, resolutionSize, windowInitialLocation, location);
         }
         #endregion
 
@@ -38,7 +38,7 @@ namespace ShellEngine.Prelude.Plugin
         #endregion
 
         #region Methods
-
+        
         #endregion
     }
 }
